@@ -1,27 +1,26 @@
 from player import Player
 from battle import Battle
-
-
-def game_intro():
-    # Your game intro logic goes here
-    pass
-
-
-def display_stats(player1, player2):
-    # The same display_stats function as before
-    pass
+from story import story_intro, story_choice
+from utility import game_intro, display_stats
 
 
 def main():
     game_intro()
-    player_name = input("Please enter your name:\n   ")
+
+    player_name = input('Please enter your name:\n    ')
     player1 = Player(player_name)
-    player2 = Player()
-    battle = Battle(player1, player2)
-    battle.battle_loop()
+    player2 = Player('Comp')  # You can set the name of the computer player here
+
+    story_intro(player1.name)
+
+    battle1 = Battle(player1, player2)
+    battle1.battle_loop()
     display_stats(player1, player2)
-    # Add more battles and story elements here
+
+    story_choice(player1)
+
+    # add more battles and story elements here
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
