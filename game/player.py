@@ -21,6 +21,3 @@ class Player:
     def heal(self):
         healing = random.randint(5, 25)
         return healing
-
-
-# rest of player class remains the same

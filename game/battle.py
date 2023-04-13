@@ -20,11 +20,13 @@ class Battle:
         while self.player1.hp > 0 and self.player2.hp > 0:
             twp(f"\n{self.turn.name}'s turn!")
             if self.turn == self.player1:
-                action = int(input(f"{self.player1.name}, please choose an action:\n) Normal Attack\n2) Special Attack\n3) Heal"))
+                action = int(input(f"{self.player1.name}, please choose an action:\n1) Normal Attack\n2) Special Attack\n3) Heal"))
                 if action == 1:
                     player_normal_attack = self.player1.normal_atk()
                     self.player2.hp -= player_normal_attack
                     self.player1.energy += 10
+                    self.player1.total_damage_dealt += player_normal_attack
+                    self.player2.total_damage_taken += player_normal_attack
                     time.sleep(1)
                     twp(f"\n{self.player1.name} just did {player_normal_attack} damage!")
                     twp(f"{self.player1.name} now has {self.player1.hp} health and {self.player1.energy} energy")
@@ -35,6 +37,8 @@ class Battle:
                     player_special_attack = self.player1.spec_attack()
                     self.player2.hp -= player_special_attack
                     self.player1.energy -= 20
+                    self.player1.total_damage_dealt += player_special_attack
+                    self.player2.total_damage_taken += player_special_attack
                     time.sleep(1)
                     twp(f'\n{self.player1.name} just did {player_special_attack} damage!')
                     twp(f'{self.player1.name} now has {self.player1.hp} health and {self.player1.energy} energy')
@@ -60,6 +64,8 @@ class Battle:
                     comp_spec_attack = self.player2.spec_attack()
                     self.player1.hp -= comp_spec_attack
                     self.player2.energy -= 20
+                    self.player2.total_damage_dealt += comp_spec_attack
+                    self.player1.total_damage_taken += comp_spec_attack
                     time.sleep(1)
                     twp(f'The computer now has {self.player2.hp} health and {self.player2.energy} energy')
                     self.turn = self.player1
@@ -77,20 +83,19 @@ class Battle:
                     comp_norm_attack = self.player2.normal_atk()
                     self.player1.hp -= comp_norm_attack
                     self.player2.energy += 10
+                    self.player2.total_damage_dealt += comp_norm_attack
+                    self.player1.total_damage_taken += comp_norm_attack
                     time.sleep(1)
                     twp(f'\nComp just did {comp_norm_attack} damage!')
                     twp(f'\n{self.player1.name} now has {self.player1.hp} health and {self.player1.energy} energy')
                     twp(f'The computer now has {self.player2.hp} health and {self.player2.energy} energy')
                     self.turn = self.player1
-                # rest of p1 logic here
-                # dont forget to update the turn at end of each turn
-            # Your battle loop logic goes here
-            # Replace all instances of "player_hp", "player_energy", "comp_hp", "comp_energy"
-            # with "self.player1.hp", "self.player1.energy", "self.player2.hp", "self.player2.energy"
-            # Replace all instances of "name" with "self.player1.name"
-            # Replace all instances of "Comp" with "self.player2.name"
+            # rest of p1 logic here
+            # don't forget to update the turn at the end of each turn
 
         if self.player1.hp <= 0:
             twp(f'{self.player2.name} has won this round!')
+            self.player2.battles_won += 1
         elif self.player2.hp <= 0:
             twp(f'{self.player1.name} has won this round!')
+            self.player1.battles_won += 1

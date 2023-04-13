@@ -1,7 +1,7 @@
 from player import Player
 from battle import Battle
 from story import story_intro, random_story_event
-from utility import game_intro, display_stats
+from utility import game_intro, display_player_stats
 
 
 def main():
@@ -15,7 +15,8 @@ def main():
 
     battle1 = Battle(player1, player2)
     battle1.battle_loop()
-    display_stats(player1, player2)
+    display_player_stats(player1)
+    display_player_stats(player2)
 
     random_story_event(player1)
 
