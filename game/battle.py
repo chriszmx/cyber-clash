@@ -76,7 +76,7 @@ class Battle:
                 else:
                     comp_norm_attack = self.player2.normal_atk()
                     self.player1.hp -= comp_norm_attack
-                    self.player2.energy -= 10
+                    self.player2.energy += 10
                     time.sleep(1)
                     twp(f'\nComp just did {comp_norm_attack} damage!')
                     twp(f'\n{self.player1.name} now has {self.player1.hp} health and {self.player1.energy} energy')
